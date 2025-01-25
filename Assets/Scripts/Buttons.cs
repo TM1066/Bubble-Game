@@ -1,16 +1,14 @@
 using UnityEngine;
-
-public class Buttons : MonoBehaviour
+using UnityEngine.SceneManagement;
+public class Buttons : MonoBehaviour 
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public static void PlayGame()
     {
-        
+        GlobalManager.score = 0;
+        GlobalManager.playerLives = 3;
+        GlobalManager.readyToSpawnNewPlayer = true;
+        SceneManager.LoadScene("PlayScene");
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+
 }

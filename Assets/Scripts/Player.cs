@@ -17,6 +17,7 @@ public class Player : MonoBehaviour
     public float size = 0.5f;
 
     public AudioSource popAudioSource;
+    public SpriteShapeRenderer spriteShapeRenderer;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -79,13 +80,14 @@ public class Player : MonoBehaviour
         }
         else 
         {
+            GlobalManager.SaveHighScore();
             GlobalManager.score = 0;
             GlobalManager.playerLives = 3;
         }
 
 
         popAudioSource.Play();
-        this.GetComponent<SpriteShapeRenderer>().color = Color.clear;
+        spriteShapeRenderer.color = Color.clear;
         bubbleFaceImage.color = Color.clear;
 
         yield return null;

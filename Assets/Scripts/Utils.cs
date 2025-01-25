@@ -1,6 +1,7 @@
 using UnityEngine;
 using System;
 using System.Collections;
+using UnityEngine.UIElements;
 
 public static class Utils 
 {
@@ -13,6 +14,26 @@ public static class Utils
             if (thingToMove != null) // I like to destroy
             {
                 thingToMove.position = Vector3.Lerp(vectorFrom, vectorTo, timeElapsed / duration);
+                timeElapsed += Time.deltaTime;
+                yield return null;
+            }
+            else 
+            {
+                break;
+            }
+        }
+        yield return null;
+    }
+
+    public static IEnumerator ScaleLerp(Transform thingToScale, Vector2 scaleFrom, Vector2 scaleTo, float duration)
+    {
+        float timeElapsed = 0;
+
+        while (timeElapsed < duration) 
+        {
+            if (thingToScale != null) // I like to destroy
+            {
+                thingToScale.localScale = Vector3.Slerp(scaleFrom, scaleTo, timeElapsed / duration);
                 timeElapsed += Time.deltaTime;
                 yield return null;
             }

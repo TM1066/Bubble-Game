@@ -25,7 +25,7 @@ MonoBehaviour:
     - {fileID: 21300000, guid: f55991adfa7a39b44bbcf91ea55da861, type: 3}
   - m_CornerType: 1
     m_Sprites:
-    - {fileID: 4476005101471016853, guid: ba14ae569a4c1b74e813ef1bef949a64, type: 3}
+    - {fileID: 21300000, guid: f55991adfa7a39b44bbcf91ea55da861, type: 3}
   - m_CornerType: 2
     m_Sprites:
     - {fileID: 21300000, guid: f55991adfa7a39b44bbcf91ea55da861, type: 3}

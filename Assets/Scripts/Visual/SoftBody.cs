@@ -6,7 +6,8 @@ using UnityEngine.U2D;
 public class SoftBody : MonoBehaviour
 {
     #region Fields
-    private const float splineOffset = 0.5f;
+    public float splineOffset = 0.5f;
+    public float tension = 0.5f;
 
     [SerializeField] SpriteShapeController spriteShape;
     [SerializeField] List<Transform> points = new List<Transform>();
@@ -15,7 +16,9 @@ public class SoftBody : MonoBehaviour
     #region MonoBehaviour Calls
     void Awake()
     {
-        UpdateVertices();
+        //points.Sort((a, b) => Vector2.SignedAngle(Vector2.up, a.localPosition).CompareTo(Vector2.SignedAngle(Vector2.up, b.localPosition)));
+
+        //UpdateVertices();
     }
 
     void Update()
@@ -27,30 +30,82 @@ public class SoftBody : MonoBehaviour
     #region PrivateMethods
     void UpdateVertices()
     {
-        foreach (var point in points)
+        for (int i = 0; i < points.Count; i++)
         {
+            Transform point = points[i];
             Vector2 vertex = point.localPosition;
             Vector2 towardsCentre = (Vector2.zero - vertex).normalized;
-
             float colliderRadius = point.GetComponent<CircleCollider2D>().radius;
+
             try 
             {
-            spriteShape.spline.SetPosition(points.IndexOf(point), vertex - towardsCentre * colliderRadius);
+            spriteShape.spline.SetPosition(i, vertex - towardsCentre * colliderRadius * tension);
+
             }
             catch 
             {
                 Debug.Log("Spline Points are too close together, attempting to recalculate");
-                spriteShape.spline.SetPosition(points.IndexOf(point), vertex - towardsCentre * (colliderRadius + splineOffset));
+                spriteShape.spline.SetPosition(i, vertex - towardsCentre * (colliderRadius + splineOffset));
             }
 
-            Vector2 leftTangent = spriteShape.spline.GetLeftTangent(points.IndexOf(point));
 
-            Vector2 newRightTangent = Vector2.Perpendicular(towardsCentre) * leftTangent.magnitude;
-            Vector2 newLeftTangent = Vector2.zero - (newRightTangent);
+            Vector2 edgeDir = (vertex - towardsCentre).normalized;
+            Vector2 perpendicularDir = new Vector2(-edgeDir.y, edgeDir.x);  
 
-            //spriteShape.spline.SetLeftTangent(points.IndexOf(point), newLeftTangent);
-            //spriteShape.spline.SetRightTangent(points.IndexOf(point), newRightTangent);
+            float tangentStrength = 0.5f;
+            Vector2 newRightTangent = perpendicularDir * tangentStrength;
+            Vector2 newLeftTangent = -newRightTangent;
+
+            spriteShape.spline.SetLeftTangent(i, newLeftTangent);
+            spriteShape.spline.SetRightTangent(i, newRightTangent);
+
+            spriteShape.RefreshSpriteShape();
         }
     }
+
+
+    void UpdateVerticesExample()
+{
+
+    // if (spriteShape.spline.GetPointCount() != points.Count)
+    // {
+    //     Debug.LogWarning("Spline and points count mismatch, updating...");
+    //     spriteShape.spline.Clear();
+    //     for (int i = 0; i < points.Count; i++)
+    //     {
+    //         spriteShape.spline.InsertPointAt(i, points[i].position);  // Placeholder to set count
+    //     }
+    // }
+
+
+    spriteShape.spline.Clear();
+    for (int i = 0; i < points.Count; i++)
+    {
+        spriteShape.spline.InsertPointAt(i, points[i].localPosition);  // Placeholder to set count
+    }
+
+
+
+    // for (int i = 0; i < points.Count; i++)
+    // {
+    //     Transform point = points[i];
+    //     Vector2 vertex = point.localPosition;  
+    //     Vector2 towardsCentre = (Vector2.zero - vertex).normalized;
+    //     float colliderRadius = point.GetComponent<CircleCollider2D>().radius;
+
+    //     try
+    //     {
+    //         spriteShape.spline.SetPosition(i, vertex - towardsCentre * colliderRadius);
+    //     }
+    //     catch
+    //     {
+    //         Debug.LogWarning($"Point {i} too close, recalculating...");
+    //         spriteShape.spline.SetPosition(i, vertex - towardsCentre * (colliderRadius + splineOffset));
+    //     }
+    // }
+
+    spriteShape.RefreshSpriteShape();  // Ensure visual update
+}
+
     #endregion
 }

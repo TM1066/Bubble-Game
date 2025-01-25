@@ -9,6 +9,12 @@ public class Player : MonoBehaviour
     public List<Transform> bubbleVertices = new List<Transform>();
     public Transform bubbleCentre;
 
+    public SpriteRenderer bubbleFaceImage;
+    public Sprite bubbleEffortFace;
+    public Sprite bubbleNeutralFace;
+    [Range (0,1)]
+    public float size = 0.5f;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -19,6 +25,12 @@ public class Player : MonoBehaviour
     void Update()
     {
         HandleMovement();
+        HealthSizeScaling();
+    }
+
+    void HealthSizeScaling()
+    {
+        this.transform.localScale = new Vector2(size, size);
     }
 
     void HandleMovement()
@@ -34,11 +46,12 @@ public class Player : MonoBehaviour
                     //vertex.position = new Vector2(vertex.position.x + 1, vertex.position.y);
                 }
             }
+            bubbleFaceImage.sprite = bubbleEffortFace;
         }
-        if (Input.GetKey(KeyCode.A))
+        else if (Input.GetKey(KeyCode.A))
         {
            //bubbleCentre.GetComponent<Rigidbody2D>().AddForce(new Vector2(-10,0));
-           foreach (Transform vertex in bubbleVertices)
+            foreach (Transform vertex in bubbleVertices)
             {
                 if (UnityEngine.Random.Range(0,120) == 1)
                 {
@@ -46,21 +59,56 @@ public class Player : MonoBehaviour
                     //vertex.position = new Vector2(vertex.position.x - 1, vertex.position.y);
                 }
             }
+            bubbleFaceImage.sprite = bubbleEffortFace;
+        }
+        else 
+        {
+            bubbleFaceImage.sprite = bubbleNeutralFace;
         }
     }
+
+
+
+
+    public IEnumerator GameOver()
+    {
+        if (GlobalManager.playerLives > 0)
+        {
+            GlobalManager.readyToSpawnNewPlayer = true;
+
+            //spawn new player blablabla
+        }
+
+        yield return null;
+
+    }
+
+    // public void DecreaseSize(float amount)
+    // {
+    //     if (size - amount > 0.1f)
+    //     {
+    //         size -= amount;
+    //     }
+    // }
+
+
 
     IEnumerator KeepBubbleAtCentre()
     {
         while (true)
         {
-            if (bubbleCentre.position.y > 0)
+            if (GlobalManager.gameStarted)
             {
-                bubbleCentre.GetComponent<Rigidbody2D>().AddForce(new Vector2(0,-0.75f));
+                if (bubbleCentre.position.y > 0)
+                {
+                    bubbleCentre.GetComponent<Rigidbody2D>().AddForce(new Vector2(0,-20f));
+                }
+                else if (bubbleCentre.position.y < 0)
+                {
+                    bubbleCentre.GetComponent<Rigidbody2D>().AddForce(new Vector2(0,20f));
+                }
             }
-            else if (bubbleCentre.position.y < 0)
-            {
-                bubbleCentre.GetComponent<Rigidbody2D>().AddForce(new Vector2(0,0.75f));
-            }
+
             yield return new WaitForSeconds(0.01f);
         } 
     }

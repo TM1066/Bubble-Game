@@ -9,7 +9,7 @@ public static class GlobalManager
     public static int score = 0;
     public static int highScore = 0;
 
-    public static float objectSpeed = 1f;
+    public static float objectSpeed = 2f;
 
     public static bool readyToSpawnNewPlayer = true;
 }

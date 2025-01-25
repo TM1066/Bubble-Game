@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.U2D;
 
 public class Player : MonoBehaviour
 {
@@ -14,6 +15,8 @@ public class Player : MonoBehaviour
     public Sprite bubbleNeutralFace;
     [Range (0,1)]
     public float size = 0.5f;
+
+    public AudioSource popAudioSource;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -35,7 +38,7 @@ public class Player : MonoBehaviour
 
     void HandleMovement()
     {
-        if (Input.GetKey(KeyCode.D))
+        if (Input.GetKey(KeyCode.D) && !GlobalManager.readyToSpawnNewPlayer)
         {
             //bubbleCentre.GetComponent<Rigidbody2D>().AddForce(new Vector2(10,0));
             foreach (Transform vertex in bubbleVertices)
@@ -48,7 +51,7 @@ public class Player : MonoBehaviour
             }
             bubbleFaceImage.sprite = bubbleEffortFace;
         }
-        else if (Input.GetKey(KeyCode.A))
+        else if (Input.GetKey(KeyCode.A) && !GlobalManager.readyToSpawnNewPlayer)
         {
            //bubbleCentre.GetComponent<Rigidbody2D>().AddForce(new Vector2(-10,0));
             foreach (Transform vertex in bubbleVertices)
@@ -67,31 +70,26 @@ public class Player : MonoBehaviour
         }
     }
 
-
-
-
     public IEnumerator GameOver()
     {
         if (GlobalManager.playerLives > 0)
         {
+            GlobalManager.playerLives--;
             GlobalManager.readyToSpawnNewPlayer = true;
-
-            //spawn new player blablabla
+        }
+        else 
+        {
+            GlobalManager.score = 0;
+            GlobalManager.playerLives = 3;
         }
 
+
+        popAudioSource.Play();
+        this.GetComponent<SpriteShapeRenderer>().color = Color.clear;
+        bubbleFaceImage.color = Color.clear;
+
         yield return null;
-
     }
-
-    // public void DecreaseSize(float amount)
-    // {
-    //     if (size - amount > 0.1f)
-    //     {
-    //         size -= amount;
-    //     }
-    // }
-
-
 
     IEnumerator KeepBubbleAtCentre()
     {

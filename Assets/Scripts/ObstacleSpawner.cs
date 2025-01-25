@@ -7,18 +7,12 @@ public class ObstacleSpawner : MonoBehaviour
     public Transform endPoint;
     public List<Transform> spawnPoints = new List<Transform>();
 
-    public GameObject sawBladePrefab;
+    public GameObject dartBladePrefab;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         StartCoroutine(SpawnObjects());
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     IEnumerator SpawnObjects()
@@ -30,31 +24,32 @@ public class ObstacleSpawner : MonoBehaviour
                 switch (Random.Range(0,5)) // add more for each spawn pattern
                 {
                     case 0:
-                        SpawnObject(sawBladePrefab, spawnPoints[0]);
-                        SpawnObject(sawBladePrefab, spawnPoints[3]);
+                        SpawnObject(dartBladePrefab, spawnPoints[0]);
+                        SpawnObject(dartBladePrefab, spawnPoints[3]);
                         break;
 
                     case 1:
-                        SpawnObject(sawBladePrefab, spawnPoints[0]);
-                        SpawnObject(sawBladePrefab, spawnPoints[1]);
+                        SpawnObject(dartBladePrefab, spawnPoints[0]);
+                        SpawnObject(dartBladePrefab, spawnPoints[1]);
                         break;
                     case 2:
-                        SpawnObject(sawBladePrefab, spawnPoints[1]);
-                        SpawnObject(sawBladePrefab, spawnPoints[2]);
+                        SpawnObject(dartBladePrefab, spawnPoints[1]);
+                        SpawnObject(dartBladePrefab, spawnPoints[2]);
                         break;
                     case 3:
-                        SpawnObject(sawBladePrefab, spawnPoints[1]);
-                        SpawnObject(sawBladePrefab, spawnPoints[3]);
+                        SpawnObject(dartBladePrefab, spawnPoints[1]);
+                        SpawnObject(dartBladePrefab, spawnPoints[3]);
                         break;
                 }
             }
-            yield return new WaitForSeconds(2f);
+            yield return new WaitForSeconds(1.6f);
         }
     }
 
     void SpawnObject(GameObject gameObject, Transform spawnArea)
     {
         GameObject spawnedObject = Instantiate (gameObject, spawnArea);
-        StartCoroutine(Utils.PositionLerpAndDestroy(spawnedObject.transform, this.transform.position, new Vector3(this.transform.position.x, endPoint.position.y, 0),GlobalManager.objectSpeed));
+        spawnedObject.transform.position = spawnArea.position;
+        StartCoroutine(Utils.PositionLerpAndDestroy(spawnedObject.transform, spawnArea.transform.position, new Vector3(spawnArea.transform.position.x, endPoint.position.y, 0),GlobalManager.objectSpeed));
     }
 }

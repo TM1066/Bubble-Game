@@ -1,4 +1,5 @@
 using UnityEngine;
+using System;
 using System.Collections;
 
 public static class Utils 
@@ -23,8 +24,19 @@ public static class Utils
         yield return null;
     }
 
+    public static Color GetRandomColor()
+    {
+        byte r = (Byte) UnityEngine.Random.Range(50, 255); // Make sure Colours don't get too dark to see
+        byte g = (Byte) UnityEngine.Random.Range(50, 255);
+        byte b = (Byte) UnityEngine.Random.Range(50, 255);
+
+        return new Color32(r,g,b,255); // everything starts out 1 alpha
+    }
+
     public static IEnumerator PositionLerpAndDestroy(Transform thingToMove, Vector3 vectorFrom, Vector3 vectorTo, float duration)
     {
+        yield return new WaitForSeconds(1.5f);
+
         float timeElapsed = 0;
 
         while (timeElapsed < duration) 

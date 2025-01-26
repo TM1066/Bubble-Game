@@ -2958,6 +2958,7 @@ MonoBehaviour:
   bubbleFaceImage: {fileID: 4811976006898122042}
   bubbleEffortFace: {fileID: 21300000, guid: acae745740b46a14f8569c3b435b775f, type: 3}
   bubbleNeutralFace: {fileID: 21300000, guid: 8c1a360c7318fed4f895d09e8b482a5e, type: 3}
+  bubblePopImage: {fileID: 21300000, guid: 5c926b174a21ce84abb0b50ef0d81389, type: 3}
   size: 0.762
   popAudioSource: {fileID: 5127648561192913177}
   spriteShapeRenderer: {fileID: 2594099180263151677}

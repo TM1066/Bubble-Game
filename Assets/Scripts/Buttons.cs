@@ -1,3 +1,6 @@
+using System.Collections;
+using System.Diagnostics;
+using Unity.Android.Gradle.Manifest;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 public class Buttons : MonoBehaviour 
@@ -10,14 +13,24 @@ public class Buttons : MonoBehaviour
         SceneManager.LoadScene("PlayScene");
     }
 
-    public static void ClearBubbles()
+    public void ClearBubbles(GameObject floor)
     {
-        GameObject[] objectsToDestroy = GameObject.FindGameObjectsWithTag("Bubble");
+        StartCoroutine(Vacuum(floor));
+    }
 
-        foreach (GameObject obj in objectsToDestroy)
-        {
-            Destroy(obj);
-        }
+    private IEnumerator Vacuum(GameObject floor)
+    {
+        this.GetComponent<AudioSource>().Play();
+        floor.SetActive(false);
+        Physics2D.gravity = new Vector2(0,-10);
+        yield return new WaitForSeconds(5);
+        Physics2D.gravity = new Vector2(0,0);
+        floor.SetActive(true);
+
+        // while (GameObject.Find("Random Bubble"))
+        // {
+        //     Destroy (GameObject.Find("Random Bubble"));
+        // }
     }
 
 

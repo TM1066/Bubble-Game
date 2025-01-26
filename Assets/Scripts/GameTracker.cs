@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameTracker : MonoBehaviour
 {
@@ -17,6 +18,15 @@ public class GameTracker : MonoBehaviour
         else
         {
             Destroy(gameObject); // Destroy duplicate
+        }
+    }
+
+    void Update()
+    {
+        if (Input.GetKey(KeyCode.Escape))
+        {
+            GlobalManager.SaveHighScore();
+            Application.Quit(); 
         }
     }
 }

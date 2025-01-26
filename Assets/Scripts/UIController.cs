@@ -11,15 +11,13 @@ public class UIController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        scoreText.text = $"Score: {Mathf.RoundToInt(GlobalManager.score)}";
+        scoreText.text = $"<u>Score</u> {Mathf.RoundToInt(GlobalManager.score)}";
         highScoreText.text = $"{Mathf.RoundToInt(GlobalManager.highScore)}";
-        gameOverText.text = "";
-
     }
 
     public IEnumerator GameOverTextSetter()
     {
-        gameOverText.text = $"Game Over\n\n{GlobalManager.score}/{GlobalManager.highScore}";
+        gameOverText.text = $"Game Over\n\n{Mathf.RoundToInt(GlobalManager.score)}/{Mathf.RoundToInt(GlobalManager.highScore)}";
         while (true)
         {
             StartCoroutine(Utils.ColorLerp(gameOverText, Color.clear, Color.white, 1f));

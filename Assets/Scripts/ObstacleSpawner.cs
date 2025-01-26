@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using UnityEngine;
 
 public class ObstacleSpawner : MonoBehaviour
@@ -8,6 +9,8 @@ public class ObstacleSpawner : MonoBehaviour
     public List<Transform> spawnPoints = new List<Transform>();
 
     public GameObject dartBladePrefab;
+
+    public bool canSpawnObjects = false;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -19,7 +22,7 @@ public class ObstacleSpawner : MonoBehaviour
     {
         while (true)
         {
-            if (Random.Range(0,2) == 1 && !GlobalManager.readyToSpawnNewPlayer)
+            if (Random.Range(0,2) == 1 && !GlobalManager.readyToSpawnNewPlayer && canSpawnObjects)
             {
                 switch (Random.Range(0,5)) // add more for each spawn pattern
                 {

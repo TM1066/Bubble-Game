@@ -14,11 +14,14 @@ public class Player : MonoBehaviour
     public SpriteRenderer bubbleFaceImage;
     public Sprite bubbleEffortFace;
     public Sprite bubbleNeutralFace;
+    public Sprite bubblePopImage;
     [Range (0,1)]
     public float size = 0.5f;
 
     public AudioSource popAudioSource;
     public SpriteShapeRenderer spriteShapeRenderer;
+
+    //private bool isDead;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -47,7 +50,7 @@ public class Player : MonoBehaviour
             {
                 if (UnityEngine.Random.Range(0,120) == 1)
                 {
-                    vertex.GetComponent<Rigidbody2D>().AddForce(new Vector2(20,0));
+                    vertex.GetComponent<Rigidbody2D>().AddForce(new Vector2(20 + (1f / size),0));
                     //vertex.position = new Vector2(vertex.position.x + 1, vertex.position.y);
                 }
             }
@@ -60,7 +63,7 @@ public class Player : MonoBehaviour
             {
                 if (UnityEngine.Random.Range(0,120) == 1)
                 {
-                    vertex.GetComponent<Rigidbody2D>().AddForce(new Vector2(-20,0));
+                    vertex.GetComponent<Rigidbody2D>().AddForce(new Vector2(-20 - (1f / size),0));
                     //vertex.position = new Vector2(vertex.position.x - 1, vertex.position.y);
                 }
             }
@@ -86,9 +89,36 @@ public class Player : MonoBehaviour
                 Destroy(circleCol);
             }
         }
+
+        foreach (ObstacleSpawner spawner in FindObjectsByType<ObstacleSpawner>(FindObjectsSortMode.None))
+                {
+                    spawner.canSpawnObjects = false;
+                }
+        // GetComponentInChildren<SpriteShapeController>().spline.isOpenEnded = true;
+        // foreach (DistanceJoint2D distanceJoi in GetComponentsInChildren<DistanceJoint2D>())
+        // {
+        //     if (distanceJoi)
+        //     {
+        //         Destroy(distanceJoi);
+        //     }
+        // }
+        // foreach (SpringJoint2D springJoi in GetComponentsInChildren<SpringJoint2D>())
+        // {
+        //     if (springJoi)
+        //     {
+        //         Destroy(springJoi);
+        //     }
+        // }
+        foreach (Transform vertex in bubbleVertices)
+        {
+            vertex.GetComponent<Rigidbody2D>().linearVelocity = Vector2.zero;
+        }
+        //isDead = true;
+
         popAudioSource.Play();
         spriteShapeRenderer.color = Color.clear;
         bubbleFaceImage.color = Color.clear;
+        //bubbleFaceImage.sprite = bubblePopImage;
 
         if (GlobalManager.playerLives >= 1)
         {
@@ -114,7 +144,7 @@ public class Player : MonoBehaviour
     {
         while (true)
         {
-            if (GlobalManager.gameStarted)
+            if (!GlobalManager.readyToSpawnNewPlayer)
             {
                 Rigidbody2D rig = bubbleCentre.GetComponent<Rigidbody2D>();
                 Debug.Log("Player World Position: " + bubbleCentre.position.y);

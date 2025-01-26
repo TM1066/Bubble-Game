@@ -7,6 +7,7 @@ public class Buttons : MonoBehaviour
 {
     public static void PlayGame()
     {
+        Physics2D.gravity = new Vector2(0,0);
         GlobalManager.score = 0;
         GlobalManager.playerLives = 3;
         GlobalManager.readyToSpawnNewPlayer = true;

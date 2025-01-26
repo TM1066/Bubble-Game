@@ -129,6 +129,7 @@ public class Player : MonoBehaviour
         }
         else 
         {
+            GlobalManager.readyToSpawnNewPlayer = true;
             GlobalManager.SaveHighScore();
             StartCoroutine(GameObject.Find("UICanvas").GetComponent<UIController>().GameOverTextSetter());
             yield return new WaitForSeconds(5f);

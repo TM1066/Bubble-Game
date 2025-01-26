@@ -57513,8 +57513,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 64
-  m_fontSizeBase: 64
+  m_fontSize: 128
+  m_fontSizeBase: 128
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -80465,6 +80465,9 @@ MonoBehaviour:
   - {fileID: 397486721}
   - {fileID: 1632225191}
   - {fileID: 204428087}
+  popAudioSource: {fileID: 0}
+  bubblePopPrefab: {fileID: 0}
+  spriteShapeRenderer: {fileID: 0}
 --- !u!231 &4107580183643430553
 SpringJoint2D:
   m_ObjectHideFlags: 0

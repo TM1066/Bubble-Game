@@ -50,7 +50,7 @@ public class Player : MonoBehaviour
             {
                 if (UnityEngine.Random.Range(0,120) == 1)
                 {
-                    vertex.GetComponent<Rigidbody2D>().AddForce(new Vector2(20 + (1f / size),0));
+                    vertex.GetComponent<Rigidbody2D>().AddForce(new Vector2(200 - size * 50,0));
                     //vertex.position = new Vector2(vertex.position.x + 1, vertex.position.y);
                 }
             }
@@ -63,7 +63,7 @@ public class Player : MonoBehaviour
             {
                 if (UnityEngine.Random.Range(0,120) == 1)
                 {
-                    vertex.GetComponent<Rigidbody2D>().AddForce(new Vector2(-20 - (1f / size),0));
+                    vertex.GetComponent<Rigidbody2D>().AddForce(new Vector2(-200 + size * 50,0));
                     //vertex.position = new Vector2(vertex.position.x - 1, vertex.position.y);
                 }
             }
@@ -129,7 +129,7 @@ public class Player : MonoBehaviour
         }
         else 
         {
-            GlobalManager.readyToSpawnNewPlayer = true;
+            GlobalManager.gameFinished = true;
             GlobalManager.SaveHighScore();
             StartCoroutine(GameObject.Find("UICanvas").GetComponent<UIController>().GameOverTextSetter());
             yield return new WaitForSeconds(5f);

@@ -684,6 +684,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8341396723642474534}
   - component: {fileID: 3971188161286963983}
+  - component: {fileID: 2167521816111448036}
   m_Layer: 0
   m_Name: Random Bubble
   m_TagString: Bubble
@@ -728,6 +729,106 @@ MonoBehaviour:
   - {fileID: 4026869320815190600}
   - {fileID: 5724458077232310341}
   - {fileID: 8934758179501195870}
+  popAudioSource: {fileID: 2167521816111448036}
+  bubblePopPrefab: {fileID: 9145003582267007013, guid: f46c46365a03aed48a84a01aea17d3c8, type: 3}
+  spriteShapeRenderer: {fileID: 126881909637149263}
+--- !u!82 &2167521816111448036
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3046619009635888701}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 234072b754953bc418107e27ce831111, type: 3}
+  m_Resource: {fileID: 8300000, guid: 234072b754953bc418107e27ce831111, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &3301174969784796760
 GameObject:
   m_ObjectHideFlags: 0
@@ -1750,6 +1851,8 @@ GameObject:
   - component: {fileID: 126881909637149263}
   - component: {fileID: 1958352658861577249}
   - component: {fileID: 541700686278902098}
+  - component: {fileID: 3691600692656234639}
+  - component: {fileID: 7395372063823779812}
   m_Layer: 0
   m_Name: Bubble Sprite Shape
   m_TagString: Player
@@ -1937,7 +2040,27 @@ MonoBehaviour:
   m_BoundsScale: 2
   m_Creator: {fileID: 0}
   m_Modifiers: []
-  m_ColliderSegment: []
+  m_ColliderSegment:
+  - {x: -0.08844367, y: 1.2477872}
+  - {x: 0.26807535, y: 1.2170746}
+  - {x: 0.62426084, y: 1.0501139}
+  - {x: 0.994416, y: 0.67548156}
+  - {x: 1.1934396, y: 0.34105915}
+  - {x: 1.2598289, y: 0.07615856}
+  - {x: 1.2258147, y: -0.21225932}
+  - {x: 0.9112736, y: -0.8077884}
+  - {x: 0.68876314, y: -1.061304}
+  - {x: 0.48034614, y: -1.1894807}
+  - {x: 0.10188674, y: -1.2673916}
+  - {x: -0.28072238, y: -1.2095072}
+  - {x: -0.6396389, y: -1.0278659}
+  - {x: -1.0134892, y: -0.620298}
+  - {x: -1.1977458, y: -0.2771691}
+  - {x: -1.2415824, y: 0.0517722}
+  - {x: -1.0948315, y: 0.50163674}
+  - {x: -0.8905858, y: 0.84561694}
+  - {x: -0.58763707, y: 1.0783968}
+  - {x: -0.08844367, y: 1.2477872}
   m_ShadowSegment: []
 --- !u!114 &541700686278902098
 MonoBehaviour:
@@ -1946,12 +2069,87 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5650763045632720772}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 31a19414c41e5ae4aae2af33fee712f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_ShowMaskGraphic: 1
+--- !u!114 &3691600692656234639
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5650763045632720772}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f481a9785dc864446a72f774db2e0af3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  movingBubble: {fileID: 3971188161286963983}
+  shapeController: {fileID: 1958352658861577249}
+--- !u!68 &7395372063823779812
+EdgeCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5650763045632720772}
+  m_Enabled: 0
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 51
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 4
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 51
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 51
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 51
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 51
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_EdgeRadius: 0
+  m_Points:
+  - {x: -0.08844367, y: 1.2477872}
+  - {x: 0.26807535, y: 1.2170746}
+  - {x: 0.62426084, y: 1.0501139}
+  - {x: 0.994416, y: 0.67548156}
+  - {x: 1.1934396, y: 0.34105915}
+  - {x: 1.2598289, y: 0.07615856}
+  - {x: 1.2258147, y: -0.21225932}
+  - {x: 0.9112736, y: -0.8077884}
+  - {x: 0.68876314, y: -1.061304}
+  - {x: 0.48034614, y: -1.1894807}
+  - {x: 0.10188674, y: -1.2673916}
+  - {x: -0.28072238, y: -1.2095072}
+  - {x: -0.6396389, y: -1.0278659}
+  - {x: -1.0134892, y: -0.620298}
+  - {x: -1.1977458, y: -0.2771691}
+  - {x: -1.2415824, y: 0.0517722}
+  - {x: -1.0948315, y: 0.50163674}
+  - {x: -0.8905858, y: 0.84561694}
+  - {x: -0.58763707, y: 1.0783968}
+  - {x: -0.08844367, y: 1.2477872}
+  m_AdjacentStartPoint: {x: 0, y: 0}
+  m_AdjacentEndPoint: {x: 0, y: 0}
+  m_UseAdjacentStartPoint: 0
+  m_UseAdjacentEndPoint: 0
 --- !u!1 &5682290937433281645
 GameObject:
   m_ObjectHideFlags: 0

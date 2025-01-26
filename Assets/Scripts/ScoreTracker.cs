@@ -13,7 +13,7 @@ public class ScoreTracker : MonoBehaviour
     {
         while (true)
         {
-            if (GameObject.Find("Player Bubble") && !GlobalManager.readyToSpawnNewPlayer)
+            if (GameObject.Find("Player Bubble") && !GlobalManager.gameFinished)
             {
                 GlobalManager.score += (1f * GameObject.Find("Player Bubble").GetComponent<Player>().size);
                 if (GlobalManager.score > GlobalManager.highScore)

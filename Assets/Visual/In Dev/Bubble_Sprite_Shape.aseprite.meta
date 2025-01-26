@@ -122,9 +122,9 @@ ScriptedImporter:
     tessellationDetail: 0
     uvTransform: {x: 0, y: 0}
   animatedSpriteImportData:
-  - name: Frame_0
+  - name: Bubble_Sprite_Shape
     originalName: 
-    pivot: {x: 0.5, y: 0}
+    pivot: {x: 0.5, y: -0.032258064}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     customData: 
@@ -132,9 +132,9 @@ ScriptedImporter:
       serializedVersion: 2
       x: 4
       y: 4
-      width: 36
-      height: 36
-    spriteID: b62988ff2b7750a41aad0012050aee2b
+      width: 30
+      height: 31
+    spriteID: 7e3f0752efde06845b407e6f931a8847
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -156,11 +156,11 @@ ScriptedImporter:
       frameIndex: 0
       additiveSortOrder: 0
       cellRect:
-        x: 0
-        y: 0
-        width: 36
-        height: 36
-      spriteId: b62988ff2b7750a41aad0012050aee2b
+        x: 3
+        y: 1
+        width: 30
+        height: 31
+      spriteId: 7e3f0752efde06845b407e6f931a8847
     linkedCells: []
     parentIndex: -1
   platformSettings:

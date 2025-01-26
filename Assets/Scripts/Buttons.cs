@@ -1,6 +1,4 @@
 using System.Collections;
-using System.Diagnostics;
-using Unity.Android.Gradle.Manifest;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 public class Buttons : MonoBehaviour 
@@ -11,6 +9,7 @@ public class Buttons : MonoBehaviour
         GlobalManager.score = 0;
         GlobalManager.playerLives = 3;
         GlobalManager.readyToSpawnNewPlayer = true;
+        GlobalManager.gameFinished = false;
         SceneManager.LoadScene("PlayScene");
     }
 

@@ -2,7 +2,7 @@ using UnityEngine;
 
 public static class GlobalManager
 {
-    public static bool gameStarted = true;
+    public static bool gameFinished = false;
 
     public static int playerLives = 3;
 

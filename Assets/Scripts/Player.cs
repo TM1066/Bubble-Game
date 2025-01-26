@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.U2D;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
@@ -71,24 +72,40 @@ public class Player : MonoBehaviour
         }
     }
 
-    public IEnumerator GameOver()
+    public void StartGameOver()
     {
-        if (GlobalManager.playerLives > 0)
+        StartCoroutine(GameOver());
+    }
+
+    private IEnumerator GameOver()
+    {
+        foreach (CircleCollider2D circleCol in GetComponentsInChildren<CircleCollider2D>())
+        {
+            if (circleCol)
+            {
+                Destroy(circleCol);
+            }
+        }
+        popAudioSource.Play();
+        spriteShapeRenderer.color = Color.clear;
+        bubbleFaceImage.color = Color.clear;
+
+        if (GlobalManager.playerLives >= 1)
         {
             GlobalManager.playerLives--;
             GlobalManager.readyToSpawnNewPlayer = true;
+            yield return new WaitForSeconds(1f);
+            Destroy(this.gameObject);
         }
         else 
         {
             GlobalManager.SaveHighScore();
+            StartCoroutine(GameObject.Find("UICanvas").GetComponent<UIController>().GameOverTextSetter());
+            yield return new WaitForSeconds(5f);
             GlobalManager.score = 0;
             GlobalManager.playerLives = 3;
+            SceneManager.LoadScene("Main Menu");
         }
-
-
-        popAudioSource.Play();
-        spriteShapeRenderer.color = Color.clear;
-        bubbleFaceImage.color = Color.clear;
 
         yield return null;
     }
@@ -99,16 +116,17 @@ public class Player : MonoBehaviour
         {
             if (GlobalManager.gameStarted)
             {
+                Rigidbody2D rig = bubbleCentre.GetComponent<Rigidbody2D>();
+                Debug.Log("Player World Position: " + bubbleCentre.position.y);
                 if (bubbleCentre.position.y > 0)
                 {
-                    bubbleCentre.GetComponent<Rigidbody2D>().AddForce(new Vector2(0,-20f));
+                    rig.AddForce(new Vector2(0,-(rig.linearVelocityY * 20) - 10f));
                 }
                 else if (bubbleCentre.position.y < 0)
                 {
-                    bubbleCentre.GetComponent<Rigidbody2D>().AddForce(new Vector2(0,20f));
+                    rig.AddForce(new Vector2(0,(rig.linearVelocityY * 2) + 10));
                 }
             }
-
             yield return new WaitForSeconds(0.01f);
         } 
     }

@@ -10,7 +10,7 @@ public class RandomMovingBubble : MonoBehaviour
     void Start()
     {
         StartCoroutine(HandleMovement());
-        float scale = Random.Range(0f, 1f);
+        float scale = Random.Range(0.1f, 1f);
         this.transform.localScale = new Vector2 (scale,scale);
     }
 

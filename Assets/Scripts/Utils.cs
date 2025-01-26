@@ -2,6 +2,7 @@ using UnityEngine;
 using System;
 using System.Collections;
 using UnityEngine.UIElements;
+using TMPro;
 
 public static class Utils 
 {
@@ -14,6 +15,52 @@ public static class Utils
             if (thingToMove != null) // I like to destroy
             {
                 thingToMove.position = Vector3.Lerp(vectorFrom, vectorTo, timeElapsed / duration);
+                timeElapsed += Time.deltaTime;
+                yield return null;
+            }
+            else 
+            {
+                break;
+            }
+        }
+        yield return null;
+    }
+
+    public static IEnumerator CameraLerp(Camera camera, Vector3 vectorFrom, Vector3 vectorTo, float cameraSize, float duration)
+    {
+        GlobalManager.cameraMoving = true;
+
+        float timeElapsed = 0;
+        float cameraCurrentSize = camera.orthographicSize;
+
+        while (timeElapsed < duration) 
+        {
+            if (camera != null) // I like to destroy
+            {
+                camera.transform.position = Vector3.Slerp(vectorFrom, vectorTo, timeElapsed / duration);
+                camera.orthographicSize = Mathf.Lerp(cameraCurrentSize, cameraSize, timeElapsed / duration);
+                timeElapsed += Time.deltaTime;
+                yield return null;
+            }
+            else 
+            {
+                break;
+            }
+        }
+        camera.transform.position = vectorTo;
+        GlobalManager.cameraMoving = false;
+        yield return null;
+    }
+
+    public static IEnumerator ColorLerp(TextMeshProUGUI text, Color startColor, Color endColor, float duration)
+    {
+        float timeElapsed = 0;
+
+        while (timeElapsed < duration) 
+        {
+            if (text != null) // I like to destroy
+            {
+                text.color = Color.Lerp(startColor, endColor, timeElapsed / duration);
                 timeElapsed += Time.deltaTime;
                 yield return null;
             }

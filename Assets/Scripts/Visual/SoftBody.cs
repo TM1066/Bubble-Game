@@ -35,31 +35,33 @@ public class SoftBody : MonoBehaviour
             Transform point = points[i];
             Vector2 vertex = point.localPosition;
             Vector2 towardsCentre = (Vector2.zero - vertex).normalized;
-            float colliderRadius = point.GetComponent<CircleCollider2D>().radius;
-
-            try 
+            if (point.GetComponent<CircleCollider2D>()) // taking into account player being deleted
             {
-            spriteShape.spline.SetPosition(i, vertex - towardsCentre * colliderRadius * tension);
+                float colliderRadius = point.GetComponent<CircleCollider2D>().radius;
+                try 
+                {
+                spriteShape.spline.SetPosition(i, vertex - towardsCentre * colliderRadius * tension);
 
+                }
+                catch 
+                {
+                    Debug.Log("Spline Points are too close together, attempting to recalculate");
+                    spriteShape.spline.SetPosition(i, vertex - towardsCentre * (colliderRadius + splineOffset));
+                }
+
+
+                Vector2 edgeDir = (vertex - towardsCentre).normalized;
+                Vector2 perpendicularDir = new Vector2(-edgeDir.y, edgeDir.x);  
+
+                float tangentStrength = 0.5f;
+                Vector2 newRightTangent = perpendicularDir * tangentStrength;
+                Vector2 newLeftTangent = -newRightTangent;
+
+                spriteShape.spline.SetLeftTangent(i, newLeftTangent);
+                spriteShape.spline.SetRightTangent(i, newRightTangent);
+
+                spriteShape.RefreshSpriteShape();
             }
-            catch 
-            {
-                Debug.Log("Spline Points are too close together, attempting to recalculate");
-                spriteShape.spline.SetPosition(i, vertex - towardsCentre * (colliderRadius + splineOffset));
-            }
-
-
-            Vector2 edgeDir = (vertex - towardsCentre).normalized;
-            Vector2 perpendicularDir = new Vector2(-edgeDir.y, edgeDir.x);  
-
-            float tangentStrength = 0.5f;
-            Vector2 newRightTangent = perpendicularDir * tangentStrength;
-            Vector2 newLeftTangent = -newRightTangent;
-
-            spriteShape.spline.SetLeftTangent(i, newLeftTangent);
-            spriteShape.spline.SetRightTangent(i, newRightTangent);
-
-            spriteShape.RefreshSpriteShape();
         }
     }
 

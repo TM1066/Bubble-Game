@@ -8,19 +8,9 @@ public class DefaultBubbleBlower : MonoBehaviour
     public Transform spawnArea;
 
     // Update is called once per frame
-    void Update()
+    void Start() 
     {
-        if (Input.GetKey(keyToBlow))
-        {
-            var bubble = Instantiate(bubblePrefab,spawnArea);
-            bubble.transform.position = spawnArea.transform.position;
-            var bubbleScale = Random.Range(0f,3f);
-            bubble.transform.localScale = new Vector2(0,0);
-
-            StartCoroutine(Utils.ScaleLerp(bubble.transform, new Vector2(0,0), new Vector2(bubbleScale, bubbleScale), Random.Range(0.5f,2f)));
-
-            bubble.GetComponentInChildren<Rigidbody2D>().AddForce(new Vector2 (Random.Range(-50f, 50f),300));
-        }
+        StartCoroutine(HandleBlowing());    
     }
 
     IEnumerator HandleBlowing() // wink a wink
@@ -30,15 +20,19 @@ public class DefaultBubbleBlower : MonoBehaviour
             if (Input.GetKey(keyToBlow))
             {
                 var bubble = Instantiate(bubblePrefab,spawnArea);
-                bubble.transform.position = spawnArea.transform.position;
-                var bubbleScale = Random.Range(0f,3f);
-                bubble.transform.localScale = new Vector2(0,0);
+                var bubbleScale = Random.Range(0f,1f);
+                bubble.transform.position = new Vector2 (spawnArea.transform.position.x, spawnArea.transform.position.y + (bubbleScale * 2.5f));
+            
+                bubble.transform.localScale = new Vector2(bubbleScale,bubbleScale);
+                //StartCoroutine(Utils.ScaleLerp(bubble.transform, new Vector2(0,0), new Vector2(bubbleScale, bubbleScale), Random.Range(0.1f,0.3f)));
+                int xForce = Random.Range(-300, 300);
 
-                StartCoroutine(Utils.ScaleLerp(bubble.transform, new Vector2(0,0), new Vector2(bubbleScale, bubbleScale), Random.Range(0.5f,2f)));
-
-                bubble.GetComponentInChildren<Rigidbody2D>().AddForce(new Vector2 (Random.Range(-50f, 50f),300));
+                foreach (Rigidbody2D rig in bubble.GetComponentsInChildren<Rigidbody2D>())
+                {
+                    rig.AddForce(new Vector2 (xForce,300));
+                }
             }
-            yield return new WaitForSeconds(0.1f);
+            yield return new WaitForSeconds(0.2f);
         }
     }
 }

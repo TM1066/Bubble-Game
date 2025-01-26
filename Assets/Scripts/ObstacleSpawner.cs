@@ -19,7 +19,7 @@ public class ObstacleSpawner : MonoBehaviour
     {
         while (true)
         {
-            if (Random.Range(0,2) == 1)
+            if (Random.Range(0,2) == 1 && !GlobalManager.readyToSpawnNewPlayer)
             {
                 switch (Random.Range(0,5)) // add more for each spawn pattern
                 {

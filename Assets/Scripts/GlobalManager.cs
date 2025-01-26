@@ -11,10 +11,15 @@ public static class GlobalManager
 
     public static float objectSpeed = 2f;
 
-    public static bool readyToSpawnNewPlayer = false;
+    public static bool readyToSpawnNewPlayer = true;
+    public static bool cameraMoving = false;
     public static void SaveHighScore()
     {
-        PlayerPrefs.SetFloat("High Score", highScore);
+        if (score > highScore)
+        {
+            PlayerPrefs.SetFloat("High Score", highScore);
+        }
+        
     }
     public static void LoadHighScore()
     {

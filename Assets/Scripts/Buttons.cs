@@ -10,5 +10,15 @@ public class Buttons : MonoBehaviour
         SceneManager.LoadScene("PlayScene");
     }
 
+    public static void ClearBubbles()
+    {
+        GameObject[] objectsToDestroy = GameObject.FindGameObjectsWithTag("Bubble");
+
+        foreach (GameObject obj in objectsToDestroy)
+        {
+            Destroy(obj);
+        }
+    }
+
 
 }

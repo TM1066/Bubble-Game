@@ -4,7 +4,7 @@ using UnityEngine;
 public class DefaultBubbleBlower : MonoBehaviour
 {
     public GameObject bubblePrefab;
-    public KeyCode keyToBlow;
+    //public KeyCode keyToBlow;
     public Transform spawnArea;
     public AudioSource bubbleSpawnSourceAudio;
 
@@ -18,7 +18,7 @@ public class DefaultBubbleBlower : MonoBehaviour
     {
         while (true)
         {
-            if (Input.GetKey(keyToBlow))
+            if (Input.GetKey(KeyCode.X) | Input.GetKey(KeyCode.G))
             {
                 bubbleSpawnSourceAudio.Play();
                 var bubble = Instantiate(bubblePrefab,spawnArea);

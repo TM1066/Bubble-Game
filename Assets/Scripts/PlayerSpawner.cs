@@ -34,7 +34,7 @@ public class PlayerSpawner : MonoBehaviour
     {
         while (true)
         {
-            if (Input.GetKey(KeyCode.Space) && GlobalManager.readyToSpawnNewPlayer && !GlobalManager.cameraMoving)
+            if (Input.GetKey(KeyCode.X) || Input.GetKey(KeyCode.G) && GlobalManager.readyToSpawnNewPlayer && !GlobalManager.cameraMoving)
             {
                 var playerBubble = Instantiate(playerPrefab);
                 playerBubble.name = "Player Bubble";
@@ -42,7 +42,7 @@ public class PlayerSpawner : MonoBehaviour
                 var playerVar = playerBubble.GetComponent<Player>(); 
                 playerVar.size = 0.3f;
 
-                while (Input.GetKey(KeyCode.Space) && playerVar.size < 1f)
+                while (Input.GetKey(KeyCode.X) || Input.GetKey(KeyCode.G) && playerVar.size < 1f)
                 { 
                     playerVar.size += 0.01f;
                     yield return new WaitForSeconds(0.1f);

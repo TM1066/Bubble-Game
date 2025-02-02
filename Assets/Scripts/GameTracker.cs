@@ -1,5 +1,5 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
+using UnityEngine.InputSystem;
 
 public class GameTracker : MonoBehaviour
 {
@@ -19,6 +19,9 @@ public class GameTracker : MonoBehaviour
         {
             Destroy(gameObject); // Destroy duplicate
         }
+
+        var mouse = Mouse.current;
+        mouse?.WarpCursorPosition (new Vector2 (-50, 0)); //MOVE THE STUPID MOUSE OUT OF **THEEE WAYYYYY**
     }
 
     void Update()

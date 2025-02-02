@@ -26,7 +26,7 @@ public class LifeDisplay : MonoBehaviour
                 spriteRenderers[1].color = Color.clear;
                 spriteRenderers[2].color = Color.clear;
                 break;
-            case 0:
+            default:
                 foreach (SpriteRenderer spriteRenderer in spriteRenderers)
                 {
                     spriteRenderer.color = Color.clear;

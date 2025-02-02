@@ -43,7 +43,7 @@ public class Player : MonoBehaviour
 
     void HandleMovement()
     {
-        if (Input.GetKey(KeyCode.D) && !GlobalManager.readyToSpawnNewPlayer)
+        if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow) && !GlobalManager.readyToSpawnNewPlayer)
         {
             //bubbleCentre.GetComponent<Rigidbody2D>().AddForce(new Vector2(10,0));
             foreach (Transform vertex in bubbleVertices)
@@ -56,7 +56,7 @@ public class Player : MonoBehaviour
             }
             bubbleFaceImage.sprite = bubbleEffortFace;
         }
-        else if (Input.GetKey(KeyCode.A) && !GlobalManager.readyToSpawnNewPlayer)
+        else if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow) && !GlobalManager.readyToSpawnNewPlayer)
         {
            //bubbleCentre.GetComponent<Rigidbody2D>().AddForce(new Vector2(-10,0));
             foreach (Transform vertex in bubbleVertices)
@@ -120,7 +120,7 @@ public class Player : MonoBehaviour
         bubbleFaceImage.color = Color.clear;
         //bubbleFaceImage.sprite = bubblePopImage;
 
-        if (GlobalManager.playerLives >= 1)
+        if (GlobalManager.playerLives > 1)
         {
             GlobalManager.playerLives--;
             GlobalManager.readyToSpawnNewPlayer = true;
@@ -129,6 +129,7 @@ public class Player : MonoBehaviour
         }
         else 
         {
+            GlobalManager.playerLives--;
             GlobalManager.gameFinished = true;
             GlobalManager.SaveHighScore();
             StartCoroutine(GameObject.Find("UICanvas").GetComponent<UIController>().GameOverTextSetter());

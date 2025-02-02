@@ -26,7 +26,7 @@ public class PlayerSpawner : MonoBehaviour
             }
             if (Camera.main.transform.position != cameraPlayLocation.position && !GlobalManager.cameraMoving && !GlobalManager.readyToSpawnNewPlayer)
             {
-                StartCoroutine(Utils.CameraLerp(Camera.main, Camera.main.transform.position, cameraPlayLocation.position, 5, 1.5f));
+                StartCoroutine(Utils.CameraLerp(Camera.main, Camera.main.transform.position, cameraPlayLocation.position, 5.5f, 1.5f));
             }
     }
 

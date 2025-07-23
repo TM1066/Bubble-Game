@@ -32,4 +32,18 @@ public class GameTracker : MonoBehaviour
             Application.Quit(); 
         }
     }
+
+    private void OnApplicationFocus(bool focusStatus) {
+        foreach (AudioSource aS in FindObjectsByType<AudioSource>(FindObjectsSortMode.None))
+        {
+            if (aS.volume > 0)
+            {
+                aS.volume = 0;
+            }
+            else 
+            {
+                aS.volume = 0.6f;
+            }
+        }
+    }
 }

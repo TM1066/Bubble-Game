@@ -15,7 +15,7 @@ public class ScoreTracker : MonoBehaviour
         {
             if (GameObject.Find("Player Bubble") && !GlobalManager.gameFinished)
             {
-                GlobalManager.score += (1f * GameObject.Find("Player Bubble").GetComponent<Player>().size);
+                GlobalManager.score += GameObject.Find("Player Bubble").GetComponent<Player>().size * 2;
                 if (GlobalManager.score > GlobalManager.highScore)
                 {
                     GlobalManager.highScore = GlobalManager.score;

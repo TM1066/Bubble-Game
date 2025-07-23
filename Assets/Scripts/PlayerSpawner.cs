@@ -34,7 +34,7 @@ public class PlayerSpawner : MonoBehaviour
     {
         while (true)
         {
-            if (Input.GetKey(KeyCode.X) || Input.GetKey(KeyCode.G) && GlobalManager.readyToSpawnNewPlayer && !GlobalManager.cameraMoving)
+            if ((Input.GetKey(KeyCode.X) || Input.GetKey(KeyCode.G)) && GlobalManager.readyToSpawnNewPlayer && !GlobalManager.cameraMoving)
             {
                 var playerBubble = Instantiate(playerPrefab);
                 playerBubble.name = "Player Bubble";

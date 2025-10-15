@@ -15,10 +15,7 @@ public static class GlobalManager
     public static bool cameraMoving = false;
     public static void SaveHighScore()
     {
-        if (score > highScore)
-        {
-            PlayerPrefs.SetFloat("High Score", highScore);
-        }
+        PlayerPrefs.SetFloat("High Score", highScore);
         
     }
     public static void LoadHighScore()

@@ -19,6 +19,7 @@ public class ScoreTracker : MonoBehaviour
                 if (GlobalManager.score > GlobalManager.highScore)
                 {
                     GlobalManager.highScore = GlobalManager.score;
+                    GlobalManager.SaveHighScore();
                 }
             }
             yield return new WaitForSeconds(1);
